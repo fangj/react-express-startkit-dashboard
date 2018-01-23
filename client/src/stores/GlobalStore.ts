@@ -11,6 +11,7 @@ import * as studentMenu from "./menu/student.js";
 import * as teacherMenu from "./menu/teacher.js";
 
 import UserService from "../services/UserService";
+import {ClickParam} from "antd/es/menu";
 
 
 export default class GlobalStore {
@@ -90,6 +91,33 @@ export default class GlobalStore {
         }
         return demoMenu;
     }
+    onMenuClick=(menukey: ClickParam)=> {
+        this.menukey=menukey.key;
+    };
+    onSwitchSidebar=()=>{
+        this.sidebarFold=!this.sidebarFold;
+    };
+    onSwitchMenuPopover=()=>{
+        this.menuResponsVisible=!this.menuResponsVisible;
+    };
+    lock=()=>{
+        hashHistory.push('/lock');
+    };
+    unlock=()=>{
+        hashHistory.push('/')
+    };
+    switchFullScreen=()=>{
+        this.fullScreen=!this.fullScreen;
+    };
+    switchSidebarBgColor=(color)=>{
+        this.sidebarBgColor=color;
+    };
+    switchSidebarBgImg=(img)=>{
+        this.sidebarBgImg=img;
+    };
+    switchIsShowSidebarBgImg=()=>{
+        this.isShowSidebarBgImg=!this.isShowSidebarBgImg;
+    };
 }
 
 export const globalStore=new GlobalStore();
