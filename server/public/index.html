@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>react-express-startkit</title>
+</head>
+<body class="loading">
+
+
+<!--loading animate begin-->
+<link rel="stylesheet" href="css/loading.css">
+<div id="loading-prompt" class="vertical-container">
+    <img src="vendor/loading-svg/1.0.0/loading-bars.svg" width="64" height="64">
+</div>
+<!--loading animate end-->
+
+<!-- vendors begin-->
+<script src="https://cdn.bootcss.com/react/16.0.0/umd/react.production.min.js"></script>
+<script src="https://cdn.bootcss.com/react-dom/16.0.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdn.bootcss.com/prop-types/15.5.2/prop-types.min.js"></script>
+<script src="https://cdn.bootcss.com/react-router-dom/4.2.2/react-router-dom.min.js"></script>
+<script src="https://cdn.bootcss.com/mobx/3.4.1/mobx.umd.min.js"></script>
+<script src="https://cdn.bootcss.com/mobx-react/4.3.5/index.min.js"></script>
+<!-- vendors end-->
+
+
+<!--react begin-->
+<div id="root"></div>
+<link rel="stylesheet" href="build/app.css">
+<script src="build/app.js"></script>
+<!--react end-->
+
+<!--remove loading animate begin-->
+<script> document.body.classList.remove('loading'); </script>
+<!--remove loading animate end-->
+
+</body>
+</html>
