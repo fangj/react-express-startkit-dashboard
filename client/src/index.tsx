@@ -1,16 +1,20 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import { HashRouter, Route,Switch } from 'react-router-dom';
+import { Router, Route,Switch } from 'react-router';
 import HomePage from "./routes/HomePage";
 import TodoList from "./routes/TodoList";
+import hashHistory from "./helpers/hashHistory";
+import MainFrame from "./frame/MainFrame";
 
 ReactDOM.render((
-    <HashRouter>
+    <Router history={hashHistory}>
         <Switch>
             <Route path="/todo" component={TodoList}/>
-            <Route path="*" component={HomePage}/>
+            <MainFrame>
+                <Route path="*" component={HomePage}/>
+            </MainFrame>
         </Switch>
-    </HashRouter>
+    </Router>
 
 ), document.getElementById('root'));

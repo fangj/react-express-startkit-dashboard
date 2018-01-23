@@ -3,9 +3,7 @@ var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-    // devtool: 'eval',//http://www.cnblogs.com/hhhyaaon/p/5657469.html
     entry: {
-        hot: 'webpack-dev-server/client?http://localhost:3000',
         app: './src/index',
         // vendor: []
     },
@@ -13,6 +11,8 @@ module.exports = {
         //must require
         'react': 'React',
         'react-dom': 'ReactDOM',
+        'history': 'History',
+        'react-router': 'ReactRouter',
         'react-router-dom': 'ReactRouterDOM',
         "prop-types":"PropTypes",
         'mobx': 'mobx',

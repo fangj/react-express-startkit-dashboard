@@ -104,3 +104,4 @@ typings/
 .env
 
 
+*.d.ts
