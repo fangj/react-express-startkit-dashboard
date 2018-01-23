@@ -1,14 +1,14 @@
 /**
  * Created by FangJian on 2017/6/7.
  */
-
+import * as Parse from "parse";
 
 export default class UserService{
     static login(username,password) {
-        return Promise.resolve({username:"user"});
+        return Parse.User.logIn(username,password);
     }
     static logout(){
-        return Promise.resolve();
+        return Parse.User.logOut();
     }
 }
 

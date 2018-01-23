@@ -31,8 +31,8 @@ export default class GlobalStore {
     }
 
     get username(){
-        if(this.user && this.user.get){
-            return this.user.get("showName");
+        if(this.user && typeof this.user.get==="function"){
+            return this.user.get("showName")||this.user.get("username");
         }else{
             return "username";
         }

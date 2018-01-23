@@ -17,12 +17,12 @@ const Login = ({
   const { loginLoading } = globalStore;
 
   function handleOk () {
-    validateFieldsAndScroll((errors, values) => {
+    validateFieldsAndScroll((errors, {username,password}) => {
       if (errors) {
         return
       }
       globalStore.showLoginLoading();
-      globalStore.login(values)
+      globalStore.login(username,password)
     })
   }
 
