@@ -11,10 +11,9 @@ module.exports = {
         //must require
         'react': 'React',
         'react-dom': 'ReactDOM',
+        "prop-types":"PropTypes",
         'history': 'History',
         'react-router': 'ReactRouter',
-        // 'react-router-dom': 'ReactRouterDOM',
-        "prop-types":"PropTypes",
         'mobx': 'mobx',
         'mobx-react': 'mobxReact',
         //option require
