@@ -10,6 +10,8 @@ import LoginPage from "./routes/LoginPage";
 import Lock from "./routes/Lock";
 import {globalStore} from "./stores/GlobalStore";
 
+require("./themes/custom_antd.module.less");
+
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={props => (
         globalStore.isLogin ? (
