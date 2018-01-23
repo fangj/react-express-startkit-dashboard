@@ -12,9 +12,7 @@ import {ClickParam} from "antd/es/menu";
 class Side extends React.Component {
   render () {
     const { sidebarFold, menukey } = this.props;
-    const onMenuClick = (menukey: ClickParam)=> {
-        globalStore.menukey=menukey.key;
-    };
+    const onMenuClick = globalStore.onMenuClick;
     const menuData=globalStore.menuData;
     const menuProps = {
         menukey,

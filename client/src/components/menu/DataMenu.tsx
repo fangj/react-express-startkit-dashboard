@@ -5,7 +5,7 @@
 import * as React from "react";
 import {observer} from "mobx-react";
 import {Menu, Icon} from 'antd';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 const SubMenu = Menu.SubMenu;
 
@@ -32,9 +32,9 @@ export default class DataMenu extends React.Component<IDataMenu, {}> {
                     )
                 } else {
                     return (<Menu.Item key={menu.key}>
-                                <Link to={menu.url}>
+                                <a href={"#"+menu.url}>
                                     <Icon type={menu.icon}/>{menu.title}
-                                </Link>
+                                </a>
                             </Menu.Item>)
                 }
             })

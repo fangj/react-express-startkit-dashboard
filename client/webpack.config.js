@@ -13,7 +13,7 @@ module.exports = {
         'react-dom': 'ReactDOM',
         'history': 'History',
         'react-router': 'ReactRouter',
-        'react-router-dom': 'ReactRouterDOM',
+        // 'react-router-dom': 'ReactRouterDOM',
         "prop-types":"PropTypes",
         'mobx': 'mobx',
         'mobx-react': 'mobxReact',

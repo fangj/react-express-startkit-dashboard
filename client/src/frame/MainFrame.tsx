@@ -35,7 +35,7 @@ export default class MainFrame extends React.Component<any, any> {
             siderRespons,
             menuResponsVisible,
             onLock() {
-                hashHistory.push('/lock');
+                globalStore.lock();
             },
             onFull(element) {
                 if (element.requestFullscreen) {
@@ -47,7 +47,7 @@ export default class MainFrame extends React.Component<any, any> {
                 } else if (element.msRequestFullscreen) {
                     element.msRequestFullscreen()
                 }
-                globalStore.fullScreen=!globalStore.fullScreen;
+                globalStore.switchFullScreen();
             },
             onExitFull() {
                 if (document.exitFullscreen) {
@@ -57,16 +57,16 @@ export default class MainFrame extends React.Component<any, any> {
                 } else if (document.webkitExitFullscreen) {
                     document.webkitExitFullscreen()
                 }
-                globalStore.fullScreen=false;
+                globalStore.switchFullScreen();
             },
             onLogout() {
                 globalStore.logout();
             },
             onSwitchSidebar() {
-                globalStore.sidebarFold=!globalStore.sidebarFold;
+                globalStore.onSwitchSidebar();
             },
             onSwitchMenuPopover() {
-                globalStore.menuResponsVisible=!globalStore.menuResponsVisible;
+                globalStore.onSwitchMenuPopover();
             }
         };
         return (
