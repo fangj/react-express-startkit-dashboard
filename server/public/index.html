@@ -5,47 +5,42 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <title>react-express-startkit</title>
 </head>
-<body class="loading">
+<body>
+<div id="info">等待预加载器...</div>
+<div id="root"></div>
 
-
-<!--loading animate begin-->
-<link rel="stylesheet" href="css/loading.css">
-<div id="loading-prompt" class="vertical-container">
-    <img src="vendor/loading-svg/1.0.0/loading-bars.svg" width="64" height="64">
-</div>
-<!--loading animate end-->
-
-<!--todo:用preloadjs加载剩余资源，在index.html中加载常用公共资源。在页面的route中判断并加载个别资源-->
+<!--载入预加载器-->
 <script src="https://cdn.bootcss.com/PreloadJS/1.0.1/preloadjs.min.js"></script>
 
-<!-- vendors begin-->
-<!-- must -->
-<script src="https://cdn.bootcss.com/react/16.0.0/umd/react.production.min.js"></script>
-<script src="https://cdn.bootcss.com/react-dom/16.0.0/umd/react-dom.production.min.js"></script>
-<script src="https://cdn.bootcss.com/prop-types/15.5.2/prop-types.min.js"></script>
-<script src="https://cdn.bootcss.com/history/4.7.2/history.min.js"></script>
-<script src="https://cdn.bootcss.com/react-router/4.2.0/react-router.min.js"></script>
-<script src="https://cdn.bootcss.com/mobx/3.4.1/mobx.umd.min.js"></script>
-<script src="https://cdn.bootcss.com/mobx-react/4.3.5/index.min.js"></script>
-<!-- optional -->
-<script src="https://cdn.bootcss.com/parse/1.11.0/parse.min.js"></script>
-<script src="https://cdn.bootcss.com/classnames/2.2.5/index.min.js"></script>
-<script src="https://cdn.bootcss.com/moment.js/2.19.2/moment.min.js"></script>
-<script src="https://cdn.bootcss.com/antd/3.1.3/antd.min.js"></script>
-<!-- vendors end-->
-
-<!-- init  -->
+<!--用预加载器加载常用公共资源。在页面的route中判断并加载页面专用资源-->
 <script src="js/init.js"></script>
 
-<!--react begin-->
-<div id="root"></div>
-<link rel="stylesheet" href="build/app.css">
-<script src="build/app.js"></script>
-<!--react end-->
+<!--&lt;!&ndash; vendors begin&ndash;&gt;-->
+<!--&lt;!&ndash; must &ndash;&gt;-->
+<!--<script src="https://cdn.bootcss.com/react/16.0.0/umd/react.production.min.js"></script>-->
+<!--<script src="https://cdn.bootcss.com/react-dom/16.0.0/umd/react-dom.production.min.js"></script>-->
+<!--<script src="https://cdn.bootcss.com/prop-types/15.5.2/prop-types.min.js"></script>-->
+<!--<script src="https://cdn.bootcss.com/history/4.7.2/history.min.js"></script>-->
+<!--<script src="https://cdn.bootcss.com/react-router/4.2.0/react-router.min.js"></script>-->
+<!--<script src="https://cdn.bootcss.com/mobx/3.4.1/mobx.umd.min.js"></script>-->
+<!--<script src="https://cdn.bootcss.com/mobx-react/4.3.5/index.min.js"></script>-->
+<!--&lt;!&ndash; optional &ndash;&gt;-->
+<!--<script src="https://cdn.bootcss.com/parse/1.11.0/parse.min.js"></script>-->
+<!--<script src="https://cdn.bootcss.com/classnames/2.2.5/index.min.js"></script>-->
+<!--<script src="https://cdn.bootcss.com/moment.js/2.19.2/moment.min.js"></script>-->
+<!--<script src="https://cdn.bootcss.com/antd/3.1.3/antd.min.js"></script>-->
+<!--&lt;!&ndash; vendors end&ndash;&gt;-->
 
-<!--remove loading animate begin-->
-<script> document.body.classList.remove('loading'); </script>
-<!--remove loading animate end-->
+<!--&lt;!&ndash; init  &ndash;&gt;-->
+<!--<script src="js/init.js"></script>-->
+
+<!--&lt;!&ndash;react begin&ndash;&gt;-->
+
+<!--<link rel="stylesheet" href="build/app.css">-->
+<!--<script src="build/app.js"></script>-->
+<!--&lt;!&ndash;react end&ndash;&gt;-->
+
+
 
 </body>
 </html>
