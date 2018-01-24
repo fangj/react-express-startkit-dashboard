@@ -1,9 +1,3 @@
-function initParse(){
-    Parse.initialize("APPLICATION_ID");
-    let serverHost=location.host.split(':')[0];
-    Parse.serverURL = 'http://' + serverHost + ':1337/parse';
-}
-
 /**
  *
  * @param fileList 要加载的文件列表[url1,url2]
@@ -19,14 +13,14 @@ function loadResource(fileList,container){
         //完成文件加载
         function markFile(url,status){
             loadStatus[url]=status;
-            console.log(status+":"+url);
+            // console.log(status+":"+url);
         }
         //显示文件加载完成状态
         function showFileLoadStatus(){
-            console.log("================");
-            console.log("loadProgress:",loadProgress);
-            console.log("loadStatus:",loadStatus);
-            console.log("================");
+            // console.log("================");
+            // console.log("loadProgress:",loadProgress);
+            // console.log("loadStatus:",loadStatus);
+            // console.log("================");
             const textProgress="<div>加载进度："+loadProgress+"</div>";
             const textStatuses=fileList.map(url=>{
                 const status=loadStatus[url];
@@ -75,8 +69,9 @@ function loadResource(fileList,container){
     });
 }
 
-function loadVendor(container){
-    const fileList=["https://cdn.bootcss.com/react/16.0.0/umd/react.production.min.js",
+//外部资源
+function getVendorList(){
+    return ["https://cdn.bootcss.com/react/16.0.0/umd/react.production.min.js",
         "https://cdn.bootcss.com/react-dom/16.0.0/umd/react-dom.production.min.js",
         "https://cdn.bootcss.com/prop-types/15.5.2/prop-types.min.js",
         "https://cdn.bootcss.com/history/4.7.2/history.min.js",
@@ -87,26 +82,29 @@ function loadVendor(container){
         "https://cdn.bootcss.com/classnames/2.2.5/index.min.js",
         "https://cdn.bootcss.com/moment.js/2.19.2/moment.min.js",
         "https://cdn.bootcss.com/antd/3.1.3/antd.min.js"];
-    return loadResource(fileList,container);
 }
 
+//初始化parse
+function getInitParseList(){
+    return ["js/init_parse.js"];
+}
 
-function loadApp(container){
-    const fileList=["build/app.css",
+//主程序文件
+function getAppList(){
+    return ["build/app.css",
         "build/app.js"];
-    return loadResource(fileList,container);
 }
+
 
 function init(){
     const container=document.getElementById("info");
     container.innerHTML="准备加载资源";
-    loadVendor(container).then(()=>{
-        container.innerHTML="准备初始化parse";
-        initParse();
-        container.innerHTML="准备加载主程序";
-        loadApp(container).then(()=>{
-            container.remove();
-        });
+    const vendorList=getVendorList();
+    const initParseList=getInitParseList();
+    const appList=getAppList();
+    const fileList=[].concat(vendorList).concat(initParseList).concat(appList);
+    loadResource(fileList,container).then(()=>{
+        container.remove();//删除用于显示信息的元素
     });
 }
 
