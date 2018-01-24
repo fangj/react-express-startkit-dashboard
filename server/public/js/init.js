@@ -62,8 +62,6 @@ function loadResource(fileList,container){
         function loadComplete(event) {
             resolve();
         }
-        //根据fileList生成清单
-        let manifest=fileList.map(url=>({id:url,src:url}));
         
         //创建加载器并开始加载
         const preload = new createjs.LoadQueue(true);
@@ -73,7 +71,7 @@ function loadResource(fileList,container){
         preload.on("progress", handleFileProgress);
         preload.on("complete", loadComplete);
         preload.on("error", loadError);
-        preload.loadManifest(manifest);
+        preload.loadManifest(fileList);
     });
 }
 
