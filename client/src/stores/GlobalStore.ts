@@ -17,7 +17,7 @@ import {ClickParam} from "antd/es/menu";
 export default class GlobalStore {
     @observable menukey = "";
     @observable sidebarFold = false;
-    @observable siderRespons=document.body.clientWidth < 1201;
+    @observable sideResponsive=document.body.clientWidth < 1201;
     @observable menuResponsVisible=false;
     @observable fullScreen = false;
     @observable sidebarBgColor = 'red';
@@ -91,8 +91,8 @@ export default class GlobalStore {
         }
         return demoMenu;
     }
-    onMenuClick=(menukey: ClickParam)=> {
-        this.menukey=menukey.key;
+    onMenuClick=(menukey: string)=> {
+        this.menukey=menukey;
     };
     onSwitchSidebar=()=>{
         this.sidebarFold=!this.sidebarFold;
@@ -126,5 +126,5 @@ export const globalStore=new GlobalStore();
 //当窗口大小改变时修改菜单栏大小
 require("../helpers/optimizedResize.js");
 window.addEventListener("optimizedResize", function() {
-    globalStore.siderRespons=document.body.clientWidth < 1201;
+    globalStore.sideResponsive=document.body.clientWidth < 1201;
 });

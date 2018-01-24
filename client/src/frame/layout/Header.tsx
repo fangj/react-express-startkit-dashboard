@@ -1,30 +1,20 @@
 import * as React from 'react'
 import * as classnames from 'classnames'
 import {Icon, Popover, Avatar, Input} from 'antd'
-import DataMenu from "../../components/menu/DataMenu";
+import DataMenu from "../menu/DataMenu";
 import {globalStore} from "../../stores/GlobalStore";
 import * as styles from "./layout.less";
-// import {observer} from "mobx-react";
+import {observer} from "mobx-react";
+import {requestFullscreen,exitFullscreen} from "../../helpers/fullscreen";
 
-// @observer
+@observer
 class Header extends React.Component {
+
     render() {
-        const {
-            fullScreen,
-            sidebarFold,
-            onLock,
-            onFull,
-            onExitFull,
-            onLogout,
-            onSwitchSidebar,
-            siderRespons,
-            menuResponsVisible,
-            onSwitchMenuPopover
-        } = this.props;
-        //
-        // const sidebarFold=globalStore.sidebarFold;
-        // const onSwitchSidebar=globalStore.onSwitchSidebar;
-        // const onSwitchMenuPopover=globalStore.onSwitchMenuPopover;
+        const fullScreen = globalStore.fullScreen;
+        // Responsive Sidebar
+        const sidebarFold = globalStore.sidebarFold;
+        const siderRespons = globalStore.sideResponsive;
 
         const msgs = globalStore.msgs;
         const msgContent = (
@@ -47,13 +37,12 @@ class Header extends React.Component {
             menukey,
             onMenuClick() {
                 if (siderRespons) {
-                    onSwitchMenuPopover()
+                    globalStore.onSwitchMenuPopover();
                 }
             },
             data: menuData,
             sidebarFold
         };
-
 
         const popoverStyle = {
             fontSize: 12
@@ -61,6 +50,16 @@ class Header extends React.Component {
 
         const avatarStyle = {
             backgroundColor: '#555555'
+        };
+
+        const onFull=()=> {
+            requestFullscreen();
+            globalStore.switchFullScreen();
+        };
+
+        const onExitFull=()=> {
+            exitFullscreen();
+            globalStore.switchFullScreen();
         };
 
         return (
@@ -72,14 +71,14 @@ class Header extends React.Component {
                             siderRespons
                                 ? <Popover
                                     placement='bottomLeft'
-                                    onVisibleChange={onSwitchMenuPopover}
-                                    visible={menuResponsVisible}
+                                    onVisibleChange={globalStore.onSwitchMenuPopover}
+                                    visible={globalStore.menuResponsVisible}
                                     trigger='click'
                                     content={<DataMenu {...menuProps} />}
                                     overlayClassName={styles.popmenu}>
                                     <div className={styles.btn}><Icon type='bars'/></div>
                                 </Popover>
-                                : <div className={styles.btn} onClick={onSwitchSidebar}>
+                                : <div className={styles.btn} onClick={globalStore.onSwitchSidebar}>
                                     <Icon type={sidebarFold ? 'menu-unfold' : 'menu-fold'} style={{lineHeight: 1.5}}/>
                                 </div>
                         }
@@ -88,7 +87,7 @@ class Header extends React.Component {
                                 <Input placeholder='Search' style={searchStyle}/>
                             </li>
                             <li>
-                                <a onClick={!fullScreen ? () => onFull(document.documentElement) : onExitFull}>
+                                <a onClick={fullScreen ?onExitFull:onFull}>
                                     <Avatar size='small' icon={fullScreen ? 'shrink' : 'arrows-alt'}
                                             style={avatarStyle}/>
                                 </a>
@@ -102,11 +101,11 @@ class Header extends React.Component {
                             {/*</Popover>*/}
                             {/*</a>*/}
                             {/*</li>*/}
-
                             <li>
                                 <a>
                                     <Popover overlayStyle={popoverStyle}
-                                             content={<div><a onClick={onLogout}>退出</a></div>} placement='bottomRight'
+                                             content={<div><a onClick={globalStore.logout}>退出</a></div>}
+                                             placement='bottomRight'
                                              trigger='click'>
                                         <Avatar size='small' icon='user' style={avatarStyle}/>
                                     </Popover>
@@ -116,7 +115,7 @@ class Header extends React.Component {
                                 {globalStore.username}
                             </li>
                             <li>
-                                <a onClick={onLock}>
+                                <a onClick={globalStore.lock}>
                                     <Avatar size='small' icon='unlock' style={avatarStyle}/>
                                 </a>
                             </li>

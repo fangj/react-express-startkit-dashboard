@@ -22,7 +22,7 @@ export default class DataMenu extends React.Component<IDataMenu, {}> {
 
     recursion=(dataSource)=> {
         return (
-            dataSource.map((menu, index) => {
+            dataSource.map((menu) => {
                 if (menu.children) {
                     return (
                         <SubMenu key={menu.key} title={<span><Icon type={menu.icon}/>{menu.title}</span>}>
@@ -31,9 +31,9 @@ export default class DataMenu extends React.Component<IDataMenu, {}> {
                     )
                 } else {
                     return (<Menu.Item key={menu.key}>
-                                <a href={"#"+menu.url}>
+                                <Link to={menu.url}>
                                     <Icon type={menu.icon}/>{menu.title}
-                                </a>
+                                </Link>
                             </Menu.Item>)
                 }
             })
@@ -44,7 +44,8 @@ export default class DataMenu extends React.Component<IDataMenu, {}> {
         const {data,sidebarFold, menukey,onMenuClick} = this.props;
         return (<Menu
                     mode={sidebarFold ? 'vertical' : 'inline'}
-                    theme='light' onClick={onMenuClick}
+                    theme='light'
+                    onClick={(param)=>onMenuClick(param.key)}
                     selectedKeys={Array.of(menukey)}>
             {
                 this.recursion(data)
@@ -52,3 +53,7 @@ export default class DataMenu extends React.Component<IDataMenu, {}> {
         </Menu>)
     }
 }
+
+const Link=({to,children})=>{
+    return <a href={"#"+to}>{children}</a>
+};
