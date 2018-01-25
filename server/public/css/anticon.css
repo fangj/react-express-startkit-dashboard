@@ -1,0 +1,16 @@
+@font-face {
+    font-family: 'anticon';
+    src: url('https://at.alicdn.com/t/font_148784_r2qo40wrmaolayvi.eot');
+    src: url('https://at.alicdn.com/t/font_148784_r2qo40wrmaolayvi.eot');
+    /* IE9*/
+    src: url('https://at.alicdn.com/t/font_148784_r2qo40wrmaolayvi.woff') format('woff'),
+    url('/vendor/anticon/3.1.3/font_148784_r2qo40wrmaolayvi.woff') format('woff'),
+
+        /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    url('https://at.alicdn.com/t/font_148784_r2qo40wrmaolayvi.ttf') format('truetype'),
+    url('/vendor/anticon/3.1.3/font_148784_r2qo40wrmaolayvi.ttf') format('truetype'),
+
+        /* iOS 4.1- */
+    url('https://at.alicdn.com/t/font_148784_r2qo40wrmaolayvi.svg#iconfont') format('svg'),
+    url('/vendor/anticon/3.1.3/font_148784_r2qo40wrmaolayvi.svg#iconfont') format('svg');
+}

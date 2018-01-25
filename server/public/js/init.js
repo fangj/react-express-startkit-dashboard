@@ -114,6 +114,7 @@ function getVendorList(){
 function getAppList(){
     return [
         "js/init_parse.js",
+        "css/anticon.css",
         "build/custom_antd.css",
         "build/app.css",
         "build/app.js"];
