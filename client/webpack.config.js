@@ -124,3 +124,9 @@ module.exports = {
         ])
     ]
 };
+
+//build custom antd css
+const { exec } = require('child_process');
+exec('lessc --clean-css ./src/themes/custom_antd.module.less ../server/public/build/custom_antd.css ',(err, stdout, stderr) => {
+   console.log('built server/public/build/custom_antd.css');
+});

@@ -10,7 +10,7 @@ import LoginPage from "./routes/LoginPage";
 import Lock from "./routes/Lock";
 import {globalStore} from "./stores/GlobalStore";
 
-require("./themes/custom_antd.module.less");
+// require("./themes/custom_antd.module.less"); //单独用less生成，放在server/build/custom_antd.css
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={props => (

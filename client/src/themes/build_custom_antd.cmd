@@ -1,0 +1,1 @@
+lessc --clean-css custom_antd.module.less ../../../server/public/build/custom_antd.css

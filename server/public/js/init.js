@@ -91,7 +91,9 @@ function getInitParseList(){
 
 //主程序文件
 function getAppList(){
-    return ["build/app.css",
+    return [
+        "build/custom_antd.css",
+        "build/app.css",
         "build/app.js"];
 }
 
