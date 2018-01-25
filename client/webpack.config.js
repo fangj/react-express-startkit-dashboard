@@ -9,6 +9,7 @@ module.exports = {
     },
     externals: {
         //must require
+        'createjs':'createjs',
         'react': 'React',
         'react-dom': 'ReactDOM',
         "prop-types": "PropTypes",

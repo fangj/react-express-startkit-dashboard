@@ -7,6 +7,12 @@ const menuData= [
         "icon": "appstore-o",
         "title": "Admin",
         "url": "/admin"
+    },
+    {
+        "key": "pdfpage",
+        "icon": "appstore-o",
+        "title": "PDF",
+        "url": "/pdfpage"
     }
 
 ];
