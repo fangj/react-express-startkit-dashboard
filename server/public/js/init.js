@@ -109,14 +109,11 @@ function getVendorList(){
         "https://cdn.bootcss.com/antd/3.1.3/antd.min.js"];
 }
 
-//初始化parse
-function getInitParseList(){
-    return ["js/init_parse.js"];
-}
 
 //主程序文件
 function getAppList(){
     return [
+        "js/init_parse.js",
         "build/custom_antd.css",
         "build/app.css",
         "build/app.js"];
@@ -127,11 +124,20 @@ function init(){
     const container=document.getElementById("info");
     container.innerHTML="准备加载资源";
     const vendorList=getVendorList();
-    const initParseList=getInitParseList();
-    const appList=getAppList();
-    const fileList=[].concat(vendorList).concat(initParseList).concat(appList);
-    loadResource(fileList,container).then(()=>{
-        container.remove();//删除用于显示信息的元素
+
+    loadResource(vendorList,container)
+        .catch(e=>{
+            container.innerHTML="加载备用资源";
+            const internalVenodrList=vendorList.map(url=>url.replace("https://cdn.bootcss.com","vendor"));
+            return loadResource(internalVenodrList,container)
+        })
+        .then(()=>{
+            container.innerHTML="加载主程序";
+            const appList=getAppList();
+            return loadResource(appList,container)
+        })
+        .then(()=>{
+            container.remove();//删除用于显示信息的元素
     });
 }
 

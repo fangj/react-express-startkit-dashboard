@@ -1,0 +1,1 @@
+https://unpkg.com/pdfjs-dist@2.0.108/build/pdf.js
