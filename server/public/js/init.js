@@ -1,3 +1,17 @@
+function asciiBar(progress){
+    //http://www.theasciicode.com.ar/extended-ascii-code/block-graphic-character-ascii-code-219.html
+    const fill='█';
+    const blank='░';
+    const p=progress/5;//max length:20
+    let bar='';
+    for(let i=1;i<=p;i++){
+        bar=bar+fill;
+    }
+    for(let i=(p+1);i<=20;i++){
+        bar=bar+blank;
+    }
+    return bar;
+}
 /**
  *
  * @param fileList 要加载的文件列表[url1,url2]
@@ -8,7 +22,7 @@ function loadResource(fileList,container){
 
         //文件加载完成状态，{url:"ok/fail/undefined"}
         let loadStatus={};
-        let loadProgress="0%";
+        let loadProgress=0;
 
         //完成文件加载
         function markFile(url,status){
@@ -21,7 +35,7 @@ function loadResource(fileList,container){
             // console.log("loadProgress:",loadProgress);
             // console.log("loadStatus:",loadStatus);
             // console.log("================");
-            const textProgress="<div>加载进度："+loadProgress+"</div>";
+            const textProgress="<div>加载进度："+loadProgress+"%"+asciiBar(loadProgress)+"</div>";
             const textStatuses=fileList.map(url=>{
                 const status=loadStatus[url];
                 if(status==="ok"){
@@ -49,7 +63,7 @@ function loadResource(fileList,container){
 
         //已加载完毕进度
         function handleFileProgress(event) {
-            loadProgress = ""+ (preload.progress*100|0) + " %";
+            loadProgress = preload.progress*100|0;
         }
 
         //全部资源加载完毕
