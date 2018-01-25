@@ -11,8 +11,6 @@ import * as studentMenu from "./menu/student.js";
 import * as teacherMenu from "./menu/teacher.js";
 
 import UserService from "../services/UserService";
-import {ClickParam} from "antd/es/menu";
-
 
 export default class GlobalStore {
     @observable menukey = "";

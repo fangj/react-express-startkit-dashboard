@@ -55,8 +55,20 @@ module.exports = {
         rules: [
             {
                 test: /\.[tj]sx?$/,
-                loader: 'awesome-typescript-loader',
-                include: path.join(__dirname, 'src')
+                include: path.join(__dirname, 'src'),
+                use: [
+                {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['es2015'],
+                        // plugins: ["transform-object-rest-spread"]
+                    }
+                },
+                    {
+                        loader: 'awesome-typescript-loader',
+                    }
+
+                ]
             },
             {
                 test: /\.css$/,
