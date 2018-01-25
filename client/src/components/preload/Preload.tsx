@@ -4,7 +4,6 @@
 
 import * as React from "react";
 import {observer} from "mobx-react";
-import createjs from "createjs";
 import {preloadStore} from "../../stores/PreloadStore";
 //import * as styles from './Preload.less';
 

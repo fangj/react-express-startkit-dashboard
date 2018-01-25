@@ -3,6 +3,8 @@
  */
 import {computed, observable} from "mobx";
 import * as Libs from "../config/libs.js";
+import * as createjs from "createjs";
+
 export default class PreloadStore{
 
     //加载的状态:ok,fail,undefined
