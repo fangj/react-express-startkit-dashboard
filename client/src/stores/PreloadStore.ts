@@ -24,9 +24,13 @@ export default class PreloadStore{
 
     handleFileLoad(event){
         console.log('load',event.item.id,event.item.src);
-        const name=event.item.id;
-        this.loadingMap.set(name,false);
-        this.loadStatusMap.set(name,"ok");
+        let name=event.item.id;
+        this.loadingMap.set(name,false);//loadingmap区分远程和本地资源。
+        //处理本地资源加载成功事件
+        if(name.startsWith("local-")){
+            name=name.substr("local-".length);
+        }
+        this.loadStatusMap.set(name,"ok");//loadStatusMap不区分远程和本地资源。
     }
 
     handLoadError(event){
@@ -34,6 +38,17 @@ export default class PreloadStore{
         const name=event.data.id;
         this.loadingMap.set(name,false);
         this.loadStatusMap.set(name,"fail");
+        if(!name.startsWith("local-")){
+            //如果远程加载失败，切换为本地资源再试一次
+            const localName="local-"+name;
+            if(!this.loadingMap.get(localName)){
+                const url=Libs[name];
+                const localUrl=url.replace("https://cdn.bootcss.com","vendor");
+                const fileInfo={id:localName,src:localUrl};
+                this.preload.loadFile(fileInfo);
+                this.loadingMap.set(localName,true); //loadingmap区分远程和本地资源。
+            }
+        }
     }
 
 
