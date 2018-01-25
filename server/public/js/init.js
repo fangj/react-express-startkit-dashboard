@@ -68,7 +68,17 @@ function loadResource(fileList,container){
 
         //全部资源加载完毕
         function loadComplete(event) {
-            resolve();
+            let ok=true;
+            fileList.forEach(url=>{
+                if(loadStatus[url]!=='ok'){
+                    ok=false;
+                }
+            });
+            if(ok){
+                resolve(loadStatus);
+            }else{
+                reject(loadStatus);
+            }
         }
         
         //创建加载器并开始加载
