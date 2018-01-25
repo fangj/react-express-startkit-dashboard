@@ -102,6 +102,7 @@ function getVendorList(){
         "https://cdn.bootcss.com/react-router/4.2.0/react-router.min.js",
         "https://cdn.bootcss.com/mobx/3.4.1/mobx.umd.min.js",
         "https://cdn.bootcss.com/mobx-react/4.3.5/index.min.js",
+        "https://cdn.bootcss.com/axios/0.17.1/axios.min.js",
         "https://cdn.bootcss.com/parse/1.11.0/parse.min.js",
         "https://cdn.bootcss.com/classnames/2.2.5/index.min.js",
         "https://cdn.bootcss.com/moment.js/2.19.2/moment.min.js",
