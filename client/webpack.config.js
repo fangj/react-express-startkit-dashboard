@@ -1,7 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 module.exports = {
     entry: {
         app: './src/index',
@@ -57,13 +57,13 @@ module.exports = {
                 test: /\.[tj]sx?$/,
                 include: path.join(__dirname, 'src'),
                 use: [
-                {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['es2015'],
-                        // plugins: ["transform-object-rest-spread"]
-                    }
-                },
+                // {
+                //     loader: 'babel-loader',
+                //     options: {
+                //         presets: ['es2015'],
+                //         // plugins: ["transform-object-rest-spread"]
+                //     }
+                // },
                     {
                         loader: 'awesome-typescript-loader',
                     }
@@ -121,7 +121,8 @@ module.exports = {
         //typings-for-css-modules-loader needs
         new webpack.WatchIgnorePlugin([
             /(less|css)\.d\.ts$/
-        ])
+        ]),
+        new UglifyJSPlugin()
     ]
 };
 
