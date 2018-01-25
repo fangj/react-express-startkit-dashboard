@@ -1,7 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+
 module.exports = {
     entry: {
         app: './src/index',
@@ -11,13 +11,13 @@ module.exports = {
         //must require
         'react': 'React',
         'react-dom': 'ReactDOM',
-        "prop-types":"PropTypes",
+        "prop-types": "PropTypes",
         'history': 'History',
         'react-router': 'ReactRouter',
         'mobx': 'mobx',
         'mobx-react': 'mobxReact',
         //option require
-        "alertifyjs":"alertify",
+        "alertifyjs": "alertify",
         'antd': 'antd',
         'axios': 'axios',
         'classnames': 'classNames',
@@ -27,22 +27,22 @@ module.exports = {
         'lodash': '_',
         'parse': 'Parse',
         'pubsub-js': 'PubSub',
-        'toastr':'toastr',
+        'toastr': 'toastr',
         'mockjs': 'Mock',
         'mobx-react-devtools': 'mobxDevtools',
-        "recharts":"Recharts",
-        "react-transition-group":"ReactTransitionGroup",
-        "quill":"Quill",
-        "react-quill":"ReactQuill",
-        "moment":"moment",
-        "markdown-it":"markdownit",
-        "mathquill":"MathQuill",
-        "math-editor":"MathEditor",
-        "katex":"katex",
-        "js-quantities":"Qty",
-        "g2":"G2",
-        "file-saver":"FileSaver",
-        'react-jsonschema-form':'JSONSchemaForm',
+        "recharts": "Recharts",
+        "react-transition-group": "ReactTransitionGroup",
+        "quill": "Quill",
+        "react-quill": "ReactQuill",
+        "moment": "moment",
+        "markdown-it": "markdownit",
+        "mathquill": "MathQuill",
+        "math-editor": "MathEditor",
+        "katex": "katex",
+        "js-quantities": "Qty",
+        "g2": "G2",
+        "file-saver": "FileSaver",
+        'react-jsonschema-form': 'JSONSchemaForm',
     },
     output: {
         path: path.join(__dirname, '..', 'server', 'public', 'build'),
@@ -57,17 +57,9 @@ module.exports = {
                 test: /\.[tj]sx?$/,
                 include: path.join(__dirname, 'src'),
                 use: [
-                // {
-                //     loader: 'babel-loader',
-                //     options: {
-                //         presets: ['es2015'],
-                //         // plugins: ["transform-object-rest-spread"]
-                //     }
-                // },
                     {
                         loader: 'awesome-typescript-loader',
                     }
-
                 ]
             },
             {
@@ -121,13 +113,12 @@ module.exports = {
         //typings-for-css-modules-loader needs
         new webpack.WatchIgnorePlugin([
             /(less|css)\.d\.ts$/
-        ]),
-        new UglifyJSPlugin()
+        ])
     ]
 };
 
 //build custom antd css
-const { exec } = require('child_process');
-exec('lessc --clean-css ./src/themes/custom_antd.module.less ../server/public/build/custom_antd.css ',(err, stdout, stderr) => {
-   console.log('built server/public/build/custom_antd.css');
+const {exec} = require('child_process');
+exec('lessc --clean-css ./src/themes/custom_antd.module.less ../server/public/build/custom_antd.css ', (err, stdout, stderr) => {
+    console.log('built server/public/build/custom_antd.css');
 });
