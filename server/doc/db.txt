@@ -1,0 +1,45 @@
+学生(User)
+username
+password
+showName
+info :UserInfo
+
+教师(User)
+username
+password
+showName
+isTeacher:true
+
+
+学生信息(UserInfo)
+type="student"
+clazz:Clazz
+number:string 学号
+
+教学班级(CourseClazz)
+name 班级名称
+number 班级编号(如果不是手工导入，不需要)
+teacher:Teacher 任课教师
+
+课程(Course)
+name 课程名称
+instruction 介绍
+number 课程编号(如果不是手工导入，不需要)
+experiments:Experiment[]
+isTemplate:boolean (是否为课程模板)
+
+
+实验(Experiment)
+name 实验名称
+instruction 介绍
+number 实验编号(如果不是手工导入，不需要)
+isTemplate:boolean (是否为实验模板)
+template:Experiment (如果不是模板，则有个指向模板的指针)
+questions:预习问题和答案
+files:附件 (每个附件可共享，共享后将复制到实验模板中)
+
+排课(CourseSchedule)
+teacher:User
+course:Course 课程模板
+begin:
+end:

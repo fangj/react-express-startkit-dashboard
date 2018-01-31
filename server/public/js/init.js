@@ -12,12 +12,21 @@ function asciiBar(progress){
     }
     return bar;
 }
+
+function url2name(url){
+    const parts=url.split("/");
+    const len=parts.length;
+    if(url.startsWith("vendor")||url.startsWith("https://cdn.bootcss.com")){
+        return parts[len-3]+"/"+parts[len-2]+"/"+parts[len-1];
+    }
+    return url;
+}
 /**
  *
- * @param fileList 要加载的文件列表[url1,url2]
+ * @param urlList 要加载的文件列表[url1,url2]
  * @param container 用于显示加载信息的容器
  */
-function loadResource(fileList,container){
+function loadResource(urlList,container){
     return new Promise(function(resolve, reject) {
 
         //文件加载完成状态，{url:"ok/fail/undefined"}
@@ -26,7 +35,8 @@ function loadResource(fileList,container){
 
         //完成文件加载
         function markFile(url,status){
-            loadStatus[url]=status;
+            const name=url2name(url);
+            loadStatus[name]=status;
             // console.log(status+":"+url);
         }
         //显示文件加载完成状态
@@ -35,30 +45,39 @@ function loadResource(fileList,container){
             // console.log("loadProgress:",loadProgress);
             // console.log("loadStatus:",loadStatus);
             // console.log("================");
+            const nameList=urlList.map(url2name);
             const textProgress="<div>加载进度："+loadProgress+"%"+asciiBar(loadProgress)+"</div>";
-            const textStatuses=fileList.map(url=>{
-                const status=loadStatus[url];
+            const textStatuses=nameList.map(name=>{
+                const status=loadStatus[name];
                 if(status==="ok"){
-                    return "<div>☑"+url+"</div>";
+                    return "<div>☑"+name+"</div>";
                 }
                 if(status==="fail"){
-                    return "<div style='color:red'>☒"+url+"</div>";
+                    return "<div style='color:red'>☒"+name+"</div>";
                 }
-                return "<div>☐"+url+"</div>";
+                return "<div>☐"+name+"</div>";
             });
             const textStatus=textStatuses.join("\n");
             container.innerHTML=textProgress+textStatus;
         }
         //处理单个文件加载
         function handleFileLoad(event) {
+            // console.log("handleFileLoad",event.item.src);
             markFile(event.item.src,"ok");
             showFileLoadStatus();
+            checkWhetherAllResourceLoadedOk();
         }
 
-        //处理加载错误：大家可以修改成错误的文件地址，可在控制台看到此方法调用
-        function loadError(event) {
-            markFile(event.data.src,"fail");
+        //处理文件加载错误
+        //如果是远程文件尝试重新加载本地版本
+        function handLoadError(event){
+            let url=event.data.src;
+            markFile(url,"fail");
             showFileLoadStatus();
+            if(url.startsWith("https://cdn.bootcss.com")){
+                url=url.replace("https://cdn.bootcss.com","vendor");
+                preload.loadFile(url);
+            }
         }
 
         //已加载完毕进度
@@ -68,16 +87,23 @@ function loadResource(fileList,container){
 
         //全部资源加载完毕
         function loadComplete(event) {
+            console.log("loadComplete")
+            checkWhetherAllResourceLoadedOk();
+        }
+
+        //检查是否所有资源加载成功
+        function checkWhetherAllResourceLoadedOk(){
             let ok=true;
-            fileList.forEach(url=>{
-                if(loadStatus[url]!=='ok'){
+            const nameList=urlList.map(url2name);
+            nameList.forEach(name=>{
+                if(loadStatus[name]!=='ok'){
                     ok=false;
                 }
             });
             if(ok){
                 resolve(loadStatus);
             }else{
-                reject(loadStatus);
+                // reject(loadStatus); //just wait
             }
         }
         
@@ -88,8 +114,8 @@ function loadResource(fileList,container){
         preload.on("fileload", handleFileLoad);
         preload.on("progress", handleFileProgress);
         preload.on("complete", loadComplete);
-        preload.on("error", loadError);
-        preload.loadManifest(fileList);
+        preload.on("error", handLoadError);
+        preload.loadManifest(urlList);
     });
 }
 
@@ -127,11 +153,6 @@ function init(){
     const vendorList=getVendorList();
 
     loadResource(vendorList,container)
-        .catch(e=>{
-            container.innerHTML="加载备用资源";
-            const internalVenodrList=vendorList.map(url=>url.replace("https://cdn.bootcss.com","vendor"));
-            return loadResource(internalVenodrList,container)
-        })
         .then(()=>{
             container.innerHTML="加载主程序";
             const appList=getAppList();
@@ -139,7 +160,7 @@ function init(){
         })
         .then(()=>{
             container.remove();//删除用于显示信息的元素
-    });
+        });
 }
 
 init();
